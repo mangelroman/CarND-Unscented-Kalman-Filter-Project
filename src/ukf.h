@@ -99,15 +99,24 @@ public:
 
   /**
    * Updates the state and the state covariance matrix using a laser measurement
-   * @param meas_package The measurement at k+1
+   * @param z The measurement at k+1
    */
-  void UpdateLidar(MeasurementPackage meas_package);
+  void UpdateLidar(const VectorXd &z);
 
   /**
    * Updates the state and the state covariance matrix using a radar measurement
-   * @param meas_package The measurement at k+1
+   * @param z The measurement at k+1
    */
-  void UpdateRadar(MeasurementPackage meas_package);
+  void UpdateRadar(const VectorXd &z);
+
+
+  /**
+   * Updates the state and the state covariance matrix using a measurement,
+   * sigma points and the measurement noise covariance matrix R
+   * @param meas_package The measurement at k+1
+   * @return NSI value
+   */
+  double Update(const VectorXd &z, const MatrixXd &Zsig, const MatrixXd &R);
 };
 
 #endif /* UKF_H */
